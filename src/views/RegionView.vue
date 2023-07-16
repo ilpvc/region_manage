@@ -44,11 +44,15 @@ export default {
 
     async onSubmit() {
       this.loading = true
-      console.log(this.searchInfo)
+
       if (this.searchInfo.createdTime!==null){
         this.searchInfo.beginTime = this.searchInfo.createdTime[0]
         this.searchInfo.finishTime = this.searchInfo.createdTime[1]
+      }else {
+        this.searchInfo.beginTime=null
+        this.searchInfo.finishTime=null
       }
+      console.log(this.searchInfo)
       await regionStore.initRegionList(this.currentPage,this.searchInfo)
       this.tableData = regionStore.getRegionTableList()
       this.loading = false
@@ -111,14 +115,15 @@ export default {
       <el-form-item label="区域名称">
         <el-input v-model="searchInfo.regionName" placeholder="区域名称"></el-input>
       </el-form-item>
-      <el-form-item label="区域名称">
-        <el-input v-model="searchInfo.cityName" placeholder="区域名称"></el-input>
+      <el-form-item label="城市名称">
+        <el-input v-model="searchInfo.cityName" placeholder="城市名称"></el-input>
       </el-form-item>
       <el-form-item label="地址">
         <el-input v-model="searchInfo.address" placeholder="地址"></el-input>
       </el-form-item>
       <el-date-picker
         v-model="searchInfo.createdTime"
+        format="yyyy-MM-dd"
         type="daterange"
         range-separator="至"
         start-placeholder="开始日期"

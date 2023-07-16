@@ -13,9 +13,9 @@ export const useCityStore = defineStore('cityStore', () => {
     let res = await pageCity(pageNo, 5)
     let res1 = await getAllCity()
     initPages = res.data.list.pages
-    cityList = res1.data.list
+    cityList = res.data.list.records
     total = res.data.list.total
-    for (const city of cityList) {
+    for (const city of res1.data.list) {
       cityMap.set(city.id,city.cityName)
     }
 

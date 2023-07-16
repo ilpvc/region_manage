@@ -108,7 +108,7 @@ export default {
       this.region = res.data.item
     }
     let res = await getAllCity()
-    this.allCity = res.data.list
+    this.allCity = res.data.list.filter(item=>item.regionId===null)
     await cityStore.initCityList(1)
     this.loading = false
   }
